@@ -4,9 +4,10 @@ import assignment.Item;
 import assignment.ItemPricing;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
-public class SoupAndBreadOffer implements Offer {
+public class SoupAndBreadOffer extends TimeLimitedOffer {
     static final Item qualifyingItem = Item.SOUP;
     static final Item discountedItem = Item.BREAD;
 
@@ -17,7 +18,17 @@ public class SoupAndBreadOffer implements Offer {
     }
 
     @Override
-    public boolean doesApply(List<Item> items) {
+    protected LocalDate initTimeFrom() {
+        return LocalDate.now().minusDays(1);
+    }
+
+    @Override
+    protected LocalDate initTimeTo() {
+        return LocalDate.now().plusDays(6);
+    }
+
+    @Override
+    protected boolean doesApplyForItems(List<Item> items) {
         return items.contains(discountedItem)
                 && items.stream()
                 .filter(qualifyingItem::equals)

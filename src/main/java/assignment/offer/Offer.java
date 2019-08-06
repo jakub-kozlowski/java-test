@@ -6,6 +6,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface Offer {
-    boolean doesApply(List<Item> items);
+    boolean doesApply(List<Item> items, int purchaseDaysDelta);
     BigDecimal getDiscount(List<Item> items);
 }

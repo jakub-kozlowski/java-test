@@ -16,10 +16,15 @@ import static org.junit.Assert.*;
 public class SoupAndBreadOfferTest {
 
     SoupAndBreadOffer unit;
+    List<Item> twoSoupsAndBread;
 
     @Before
     public void setup() {
         unit = new SoupAndBreadOffer(new ItemPricing());
+        twoSoupsAndBread = new ArrayList<>();
+        twoSoupsAndBread.add(Item.SOUP);
+        twoSoupsAndBread.add(Item.SOUP);
+        twoSoupsAndBread.add(Item.BREAD);
     }
 
     @Test
@@ -28,10 +33,10 @@ public class SoupAndBreadOfferTest {
 
         items.add(Item.SOUP);
         items.add(Item.BREAD);
-        assertFalse( unit.doesApply(items) );
+        assertFalse( unit.doesApply(items, 0) );
 
         items.add(Item.SOUP);
-        assertTrue( unit.doesApply(items) );
+        assertTrue( unit.doesApply(items, 0) );
     }
 
     @Test
@@ -41,5 +46,15 @@ public class SoupAndBreadOfferTest {
         ItemPricing itemPricing = new ItemPricing();
         BigDecimal halfBreadPrice = itemPricing.getPrice(Item.BREAD).divide(new BigDecimal(2));
         assertThat(unit.getDiscount(items)).isEqualByComparingTo(halfBreadPrice.add(halfBreadPrice));
+    }
+
+    @Test
+    public void breadOffer_notValidTwoDaysAgo() {
+        assertFalse( unit.doesApply(twoSoupsAndBread, -2));
+    }
+
+    @Test
+    public void breadOffer_validSixDaysFromToday() {
+        assertTrue( unit.doesApply(twoSoupsAndBread, 6));
     }
 }
