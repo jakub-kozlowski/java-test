@@ -18,8 +18,16 @@ public class App {
     void run(String[] args) {
         items = parameterParser.parse(args);
 
-        if( parameterParser.hasUnknownItems() )
+        if( ! parameterParser.hasUnknownItems() ) {
+            BasketPricing basketPricing = new BasketPricing(items, new ItemPricing());
+            outputPricing(basketPricing);
+        } else {
             outputErrorParsingParameters();
+        }
+    }
+
+    private void outputPricing(BasketPricing basketPricing) {
+        System.out.println("Total: " + basketPricing.getTotal());
     }
 
     private void outputErrorParsingParameters() {

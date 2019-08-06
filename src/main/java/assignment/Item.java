@@ -4,7 +4,7 @@ public enum Item {
     SOUP("Soup")
     , BREAD("Bread")
     , MILK("Milk")
-    , APPLES("Apples");
+    , APPLE("Apple");
 
     final String name;
 
