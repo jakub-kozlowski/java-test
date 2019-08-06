@@ -30,6 +30,6 @@ public class BasketPricingTest {
     public void whenItemsInBasket_BasketTotalIsTheItemPriceSum() {
         unit = new BasketPricing(Arrays.asList(Item.APPLE, Item.BREAD, Item.MILK, Item.SOUP), itemPricing);
 
-        assertThat(unit.getTotal()).isEqualByComparingTo(new BigDecimal("3.75"));
+        assertThat(unit.getTotal()).isEqualByComparingTo(new BigDecimal("2.85"));
     }
 }

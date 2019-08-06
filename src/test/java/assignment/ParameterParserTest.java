@@ -24,8 +24,8 @@ public class ParameterParserTest {
         List<Item> items = unit.parse(null);
         assertThat(items).isEmpty();
 
-        items = unit.parse("Apples", "Milk");
-        assertThat(items).isEqualTo(Arrays.asList(Item.APPLES, Item.MILK));
+        items = unit.parse("Apple", "Milk");
+        assertThat(items).isEqualTo(Arrays.asList(Item.APPLE, Item.MILK));
     }
 
     @Test

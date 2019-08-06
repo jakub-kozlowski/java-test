@@ -44,7 +44,7 @@ public class AppTest {
 
     @Test
     public void whenAppStartedWithKnownItems_basketTotalIsOutput() {
-        String[] args = new String[] {"apples", "bread"};
+        String[] args = new String[] {"apple", "bread"};
         app.run(args);
         assertThat(systemOutContent.toString()).contains("Total:");
     }
