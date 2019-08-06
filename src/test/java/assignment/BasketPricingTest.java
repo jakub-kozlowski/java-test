@@ -21,14 +21,14 @@ public class BasketPricingTest {
 
     @Test
     public void whenNoItems_BasketTotalIsZero() {
-        unit = new BasketPricing(Collections.emptyList(), itemPricing);
+        unit = new BasketPricing(Collections.emptyList(), itemPricing, Collections.EMPTY_LIST, 0);
 
         assertThat(unit.getTotal()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
     @Test
     public void whenItemsInBasket_BasketTotalIsTheItemPriceSum() {
-        unit = new BasketPricing(Arrays.asList(Item.APPLE, Item.BREAD, Item.MILK, Item.SOUP), itemPricing);
+        unit = new BasketPricing(Arrays.asList(Item.APPLE, Item.BREAD, Item.MILK, Item.SOUP), itemPricing, Collections.EMPTY_LIST, 0);
 
         assertThat(unit.getTotal()).isEqualByComparingTo(new BigDecimal("2.85"));
     }
