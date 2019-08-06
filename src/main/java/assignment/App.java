@@ -48,6 +48,6 @@ public class App {
     }
 
     private void outputUsage() {
-        System.out.println("Usage: price-basket itemName [itemNames...] purchaseTimeDeltaInDays");
+        System.out.println("Usage: price-basket itemName [itemNames...] purchaseTimeDeltaInDays\n\nExample price-basket apple apple 2");
     }
 }
