@@ -29,13 +29,14 @@ public class AppTest {
     }
 
     @Test
-    public void canStartApp() {
+    public void whenAppStartedWithNoParameters_usageIsDisplayed() {
         app.run(new String[] {});
+        assertThat(systemOutContent.toString()).contains("Usage:");
     }
 
     @Test
     public void whenAppStartedWithUnknownItem_anErrorMessageIsDisplayed() {
-        String[] invalidArgs = new String[] {"F35 aircraft"};
+        String[] invalidArgs = new String[] {"F35 aircraft", "0"};
         app.run(invalidArgs);
         assertThat(systemOutContent.toString())
                 .contains("Following items are unknown")
@@ -44,7 +45,7 @@ public class AppTest {
 
     @Test
     public void whenAppStartedWithKnownItems_basketTotalIsOutput() {
-        String[] args = new String[] {"apple", "bread"};
+        String[] args = new String[] {"apple", "bread", "0"};
         app.run(args);
         assertThat(systemOutContent.toString()).contains("Total:");
     }

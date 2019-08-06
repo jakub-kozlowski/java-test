@@ -1,10 +1,7 @@
 package assignment;
 
-import java.util.List;
-
 public class App {
     private ParameterParser parameterParser;
-    private List<Item> items;
 
     public App() {
         parameterParser = new ParameterParser();
@@ -16,10 +13,11 @@ public class App {
     }
 
     void run(String[] args) {
-        items = parameterParser.parse(args);
-
-        if( ! parameterParser.hasUnknownItems() ) {
-            BasketPricing basketPricing = new BasketPricing(items, new ItemPricing());
+        parameterParser.parse(args);
+        if (parameterParser.isParsingFailed()) {
+            outputUsage();
+        } else if (!parameterParser.hasUnknownItems()) {
+            BasketPricing basketPricing = new BasketPricing(parameterParser.getItems(), new ItemPricing());
             outputPricing(basketPricing);
         } else {
             outputErrorParsingParameters();
@@ -32,5 +30,9 @@ public class App {
 
     private void outputErrorParsingParameters() {
         System.out.println("Following items are unknown: " + String.join(", ", parameterParser.getUnknownItems()));
+    }
+
+    private void outputUsage() {
+        System.out.println("Usage: price-basket itemName [itemNames...] purchaseTimeDeltaInDays");
     }
 }
